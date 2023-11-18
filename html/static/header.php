@@ -35,7 +35,7 @@ if(isset($_SESSION['email'])){
         if($logged_in === false){
         ?>
         <div class="login">
-            <form action="<?php echo BASE_URL; ?>/config/functions/login.inc.php" method="POST" class="form login">
+            <form action="<?php echo BASE_URL; ?>/Config/functions/login.inc.php" method="POST" class="form login">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="email" name="email" placeholder="E-mail">
                 <label for="email">E-mail</label>
