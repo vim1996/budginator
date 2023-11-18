@@ -1,12 +1,12 @@
 <?php
-define('BASE_URL', 'http://www.budginator.dk/');
-define('DB_CONNECT_PATH', __DIR__ . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'dbConnect.php');
-define('FUNCTIONS_PATH', __DIR__ . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'functions' . DIRECTORY_SEPARATOR . 'functions.php');
-define('CLASS_LOADER', __DIR__ . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'class_loader.php');
+define('BASE_URL', 'http://localhost/budget');
+define('DB_CONNECT_PATH', __DIR__ . '/../../config/dbConnect.php');
+define('FUNCTIONS_PATH', __DIR__ . '/../../config/functions/functions.php');
+define('CLASS_LOADER', __DIR__ . '/../../config/class_loader.php');
 require CLASS_LOADER;
 require DB_CONNECT_PATH;
 require FUNCTIONS_PATH;
-include 'html/static/header.php';
+include 'header.php';
 ?>
 
 <!DOCTYPE html>
