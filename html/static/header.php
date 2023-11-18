@@ -52,7 +52,7 @@ if(isset($_SESSION['email'])){
         </div>
         <?php }else{ ?>
         <div class="logout">
-            <form action="<?php echo BASE_URL; ?>/config/functions/logout.inc.php" method="POST">
+            <form action="<?php echo BASE_URL; ?>/Config/functions/logout.inc.php" method="POST">
                 <button type="submit" name="logout" class="btn logout" id="logout">Log out</button>
             </form>
         </div>

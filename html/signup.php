@@ -12,7 +12,7 @@
     <title>Document</title>
 </head>
 <body>
-<form action="../config/functions/signup.inc.php" method='POST' class="signupForm">
+<form action="../Config/functions/signup.inc.php" method='POST' class="signupForm">
     <div class="titel">
         <a href="../main.php" style="color: black; text-decoration: none;">Budginator</a>
     </div>

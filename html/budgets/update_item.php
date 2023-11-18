@@ -43,7 +43,7 @@ if(isset($_GET['updated']) && $_GET['updated'] != ""){
                 <a href="budget_page.php?budget=<?php echo $budget_id;?>" class="btn save" name="back" id="back">Tilbage</a>
             </div>
         </div>
-        <form action="../../config/functions/budget_items.php" method='POST' class="add_item_form">
+        <form action="../../Config/functions/budget_items.php" method='POST' class="add_item_form">
             <input type="hidden" class="form-control" id="fixed" name="fixed" value="<?php echo $budget['fixed']; ?>">
             <input type="hidden" class="form-control" id="budget_id" name="budget_id" value="<?php echo $budget_id; ?>">
             <input type="hidden" class="form-control" id="item_id" name="item_id" value="<?php echo $itemId; ?>">

@@ -1,6 +1,6 @@
 <?php
 session_start();
-define('DB_CONNECT_PATH', __DIR__ . '/../../config/dbConnect.php');
+define('DB_CONNECT_PATH', __DIR__ . '/../../Config/dbConnect.php');
 require DB_CONNECT_PATH;
 
 $userId = $_SESSION['userId'];
