@@ -7,12 +7,12 @@ if(isset($_POST['login'])){
     $password = $_POST['pass'];
 
     if(invalidEmail($email) !== false){
-        header('location: ../../html/static/main.php?error=invalidEmail');
+        header('location: ../../main.php?error=invalidEmail');
         exit();
     }
 
     if(emailExsists($con, $email) === false){
-        header('location: ../../html/static/main.php?error=emailNoExsists');
+        header('location: ../../main.php?error=emailNoExsists');
         exit();
     }
     login($con, $email, $password);

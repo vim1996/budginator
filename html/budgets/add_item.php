@@ -1,5 +1,5 @@
 <?php 
-include "../static/main.php";
+include "../../main.php";
 
 $email = $_SESSION['email']; // Get the users email
 if(isset($_GET['budget'])){

@@ -78,12 +78,12 @@ function createUser($con, $email, $password, $first_name, $last_name){
         $_SESSION['last_name'] = $last_name;
         mysqli_stmt_close($stmt);
         mysqli_close($con);
-        header('location: ../../html/static/main.php?userCreated');
+        header('location: ../../main.php?userCreated');
         exit();
     } else {
         mysqli_stmt_close($stmt);
         mysqli_close($con);
-        header('location: ../../html/static/main.php?failedCreateUser');
+        header('location: ../../main.php?failedCreateUser');
         exit();
     }
 }
@@ -92,7 +92,7 @@ function login($con, $email, $password){
     $sql = "SELECT * FROM users WHERE email = ?";
     $stmt = mysqli_stmt_init($con);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header('location: ../../html/static/main.php?error=stmtFailed');
+        header('location: ../../main.php?error=stmtFailed');
         exit();
     }
 
@@ -104,7 +104,7 @@ function login($con, $email, $password){
         if($checkpass === false){ // checks if the password is false
             mysqli_stmt_close($stmt);
             mysqli_close($con);
-            header('location: ../../html/static/main.php?error=wrongPass');
+            header('location: ../../main.php?error=wrongPass');
             exit();
         }elseif($checkpass === true){
             session_start();
@@ -113,13 +113,13 @@ function login($con, $email, $password){
             $_SESSION['last_name'] = $row['last_name'];
             mysqli_stmt_close($stmt);
             mysqli_close($con);
-            header('location: ../../html/static/main.php');
+            header('location: ../../html/profile.php');
             exit();
         }
     }else{
         mysqli_stmt_close($stmt);
         mysqli_close($con);
-        header('location: ../../html/static/main.php?error=noUser');
+        header('location: ../../main.php?error=noUser');
         exit();
     }
 }
@@ -129,7 +129,7 @@ function getUserId($con,$email){
     $stmt = mysqli_stmt_init($con);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){ // Check if user exsist
-        header('location: ../../html/static/main.php?error=stmtFailed');
+        header('location: ../../main.php?error=stmtFailed');
         exit();
     }
 
@@ -154,7 +154,7 @@ function getBudgets($con,$email){
         WHERE bu.user_id = ?";
         $stmt = mysqli_stmt_init($con);
         if(!mysqli_stmt_prepare($stmt, $sql)){ // Check if user exsist
-            header('location: ../../html/static/main.php?error=stmtFailed');
+            header('location: ../../main.php?error=stmtFailed');
             exit();
         }
         mysqli_stmt_bind_param($stmt, "i", $userId);
@@ -191,7 +191,7 @@ function getBudgetUsers($con, $budgetId){
         WHERE budget_id = ?";
     $stmt = mysqli_stmt_init($con);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header('location: ../../html/static/main.php?error=stmtFailed');
+        header('location: ../../main.php?error=stmtFailed');
         exit();
     }
     mysqli_stmt_bind_param($stmt, "i", $budgetId);
@@ -214,7 +214,7 @@ function getBudget($con, $budgetId){
     $sql = "SELECT * FROM budget WHERE budget_id = ?";
     $stmt = mysqli_stmt_init($con);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header('location: ../../html/static/main.php?error=stmtFailed');
+        header('location: ../../main.php?error=stmtFailed');
         exit();
     }
     mysqli_stmt_bind_param($stmt, "i", $budgetId);
@@ -232,7 +232,7 @@ function getBudgetItems($con, $budgetId){ // Gets the items from a budget
     $sql = "SELECT * FROM budget_items WHERE budget_id = ?";
     $stmt = mysqli_stmt_init($con);
     if(!mysqli_stmt_prepare($stmt, $sql)){ 
-        header('location: ../../html/static/main.php?error=stmtFailed');
+        header('location: ../../main.php?error=stmtFailed');
         exit();
     }
     mysqli_stmt_bind_param($stmt, "i", $budgetId);
@@ -300,7 +300,7 @@ function getUser($con, $email){
     $sql = "SELECT * FROM users WHERE email = ?";
     $stmt = mysqli_stmt_init($con);
     if(!mysqli_stmt_prepare($stmt, $sql)){ 
-        header('location: ../../html/static/main.php?error=stmtFailed');
+        header('location: ../../main.php?error=stmtFailed');
         exit();
     }
     mysqli_stmt_bind_param($stmt, "s", $email);

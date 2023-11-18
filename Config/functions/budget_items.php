@@ -1,5 +1,5 @@
 <?php 
-include "../../html/static/main.php";
+include "../../main.php";
 $budget_item = new BudgetItem();
 
 

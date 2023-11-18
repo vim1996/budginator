@@ -19,7 +19,7 @@ if(isset($_POST)){
         $jobTitle = $_POST['jobtitle'];
         $stmt = mysqli_stmt_init($con);
         if(!mysqli_stmt_prepare($stmt, $sql)){ 
-            header('location: ../../html/static/main.php?error=stmtFailed');
+            header('location: ../../main.php?error=stmtFailed');
             exit();
         }
         mysqli_stmt_bind_param($stmt, "sssisi", $firstName, $lastName, $email, $income, $jobTitle, $userId);

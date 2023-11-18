@@ -14,7 +14,7 @@
 <body>
 <form action="../config/functions/signup.inc.php" method='POST' class="signupForm">
     <div class="titel">
-        <a href="static/main.php" style="color: black; text-decoration: none;">Budginator</a>
+        <a href="../main.php" style="color: black; text-decoration: none;">Budginator</a>
     </div>
     <h2 style="text-align:center;">Opret bruger</h2>
     <div class="container signup">
