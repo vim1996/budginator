@@ -72,7 +72,10 @@ function createUser($con, $email, $password, $first_name, $last_name){
     mysqli_stmt_bind_param($stmt, "ssss", $first_name, $last_name, $email, $hashedPassword);
     mysqli_stmt_execute($stmt);
     if (mysqli_stmt_affected_rows($stmt) > 0) {
+        // Get the user_id of the newly inserted user
+        $user_id = mysqli_insert_id($con);
         session_start();
+        $_SESSION['user_id'] = $user_id;
         $_SESSION['email'] = $email;
         $_SESSION['first_name'] = $first_name;
         $_SESSION['last_name'] = $last_name;
@@ -108,6 +111,7 @@ function login($con, $email, $password){
             exit();
         }elseif($checkpass === true){
             session_start();
+            $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['email'] = $row['email'];
             $_SESSION['first_name'] = $row['first_name'];
             $_SESSION['last_name'] = $row['last_name'];
@@ -227,6 +231,55 @@ function getBudget($con, $budgetId){
     }
 }
 
+function createBudget($con, $data){
+    $sql = "INSERT INTO budget (name,user_id,total_amount,fixed) VALUES (?,?,?,?)";
+    $stmt = mysqli_stmt_init($con);
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        return false;
+    }
+    $name = $data['name'];
+    $user_id = $data['user_id'];
+    $total_amount = $data['total_amount'];
+    $fixed = $data['fixed'];
+    mysqli_stmt_bind_param($stmt, "siii", $name, $user_id, $total_amount, $fixed);
+    mysqli_stmt_execute($stmt);
+    if(mysqli_stmt_affected_rows($stmt) > 0){
+        $budget_id = mysqli_insert_id($con);
+        if(createBudgetUser($con,$budget_id,$user_id)){
+            return true;
+        }else{
+            deleteBudget($con,$budget_id);
+            return false;
+        }
+    }else{
+        return false;
+    }
+}
+
+function deleteBudget($con, $budget_id){
+    $sql = "DELETE FROM budget WHERE budget_id = ?";
+    $stmt = mysqli_stmt_init($con);
+    if(mysqli_stmt_prepare($stmt, $sql)){
+        mysqli_stmt_bind_param($stmt, "i", $budget_id);
+        mysqli_stmt_execute($stmt);
+    }
+}
+
+function createBudgetUser($con,$budget_id,$user_id,$primary = 1){
+    $sql = "INSERT INTO budget_users (budget_id,user_id,primary_user) VALUES (?,?,?)";
+    $stmt = mysqli_stmt_init($con);
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        return false;
+    }
+    mysqli_stmt_bind_param($stmt, "iii", $budget_id, $user_id, $primary);
+    mysqli_stmt_execute($stmt);
+    if(mysqli_stmt_affected_rows($stmt) > 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 function getBudgetItems($con, $budgetId){ // Gets the items from a budget
     $budgetItems = [];
     $sql = "SELECT * FROM budget_items WHERE budget_id = ?";
@@ -259,17 +312,21 @@ function getBudgetItems($con, $budgetId){ // Gets the items from a budget
 function getTotalBudget($con, $budgetId, $start = null, $end = null){
     if($start != null && $end != null){
         $startdate = new DateTime("$start");
+        $sdate = date('d-m-Y', strtotime($start));
+        $sdate = date_create_from_format('d-m-Y', $sdate)->format('Y-m-d');
         $enddate = new DateTime("$end");
         $interval = $startdate->diff($enddate);
         $amountMonths = $interval->y * 12 + $interval->m;
     }else{
         $amountMonths = 12;
+        $startdate = date('Y-m'); // Default to the current month if $start is not provided
     }
     $budgetItems = getBudgetItems($con, $budgetId); // Get all the budget items
     $totalArray = array();
     $monthsArray = array(); // Initialize an array to store the months
     for ($i = 0; $i <= $amountMonths; $i++) { // Loop through the months
-        $month = date('Y-m', strtotime("+$i months")); // Calculate the month for the current iteration
+        //$month = (new DateTime($startdate))->modify('+' . $i . ' months');
+        $month = date('Y-m', strtotime("$sdate +$i months")); // Calculate the month for the current iteration
         $monthsArray[] = $month; // Add the month to the array
 
         foreach($monthsArray as $month){
@@ -310,6 +367,33 @@ function getUser($con, $email){
         return $row;
     }else{
         return array('No users');
+    }
+}
+
+
+function get ($con, $table, $where, $select = '*', $groupBy = null, $join = null){
+    $sql = "SELECT " . $select .  " FROM " . $table;
+    if(!is_null($join)){
+        $sql .= " ". $join;
+    }
+    $sql.= " WHERE " . $where;
+    if(!is_null($groupBy)){
+        $sql .= " GROUP BY " . $groupBy;
+    }
+    $stmt = mysqli_stmt_init($con);
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        return array();
+    }
+    if(mysqli_stmt_execute($stmt)){
+        if(mysqli_num_rows($result = mysqli_stmt_get_result($stmt)) > 0){
+            $rows = array();
+            while ($row = mysqli_fetch_assoc($result)) {
+                $rows[] = $row;
+            }
+            return $rows;
+        }else{
+            return array();
+        }
     }
 }
 ?>

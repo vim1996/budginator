@@ -21,12 +21,12 @@ if(!$budgets){
     <title>Budgets</title>
 </head>
 <body>
+    <div class="container">
+        <div class="col-md-12 create_budget">
+        <a href="<?php echo BASE_URL; ?>/html/budgets/create_budget.php" class="create_budget">Lav budget</a>
+        </div>
+    </div>
     <div class="container profil_information">
-        <?php if($noBudgets){ ?>
-            <div class="col-md-6 budgets_column">
-                <p>Der er ingen budgetter endnu</p>
-            </div>
-        <?php }else{ ?>
             <div class="col-md-6 budgets_column">
                 <?php 
                 foreach($budgets as $budgetId => $budget){
@@ -68,7 +68,6 @@ if(!$budgets){
                     </div>
                 <?php } ?>
             </div>
-        <?php } ?>
     </div>
     
 </body>

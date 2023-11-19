@@ -2,9 +2,9 @@
 include "../../main.php";
 $budget_item = new BudgetItem();
 
-
 if(isset($_POST['create'])){
     $name = $_POST['name'];
+    $user_id = $_POST['user_id'];
     $amount = $_POST['amount'];
     $start = $_POST['start'];
     $end = $_POST['end'];
@@ -17,7 +17,7 @@ if(isset($_POST['create'])){
     }else{
         $no_end = 0;
     }
-    $result = $budget_item->createBudgetItem($name,$amount,$used_amount,$budget_id,$start,$end,$no_end);
+    $result = $budget_item->createBudgetItem($name,$amount,$used_amount,$budget_id,$start,$end,$no_end,$user_id);
     if($result){
         header('location: ../../html/budgets/add_item.php?budget= ' . $budget_id . '&created=true&name=' . $name);
     }else{

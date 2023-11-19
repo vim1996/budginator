@@ -20,7 +20,7 @@ input{
     justify-content: space-between;
     padding: 0px 2rem;
     border-radius: 15px 50px 15px;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     height: 5rem;
 }
 .titel{
@@ -177,6 +177,30 @@ a.links.active{
 .budget_information{
     text-align: center;
 }
+a.create_budget {
+    background: linear-gradient(to bottom,#1cc100 ,#089700);
+    color: #fff;
+    font-family: Trebuchet MS;
+    font-size: 12px;
+    font-weight: 800;
+    font-style: normal;
+    text-decoration: none;
+    padding: 10px 11px;
+    border: 0px solid #000;
+    width: 6rem;
+    text-align: center;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 15px;
+    box-shadow: 0px 0px 4px 0px rgba(99.99999999999994,50.999999999999986,224,0.5);
+}
+a.create_budget:hover{
+    background: linear-gradient(to bottom,#089700 ,#1cc100);
+}
+.budget_title{
+    text-align: center;
+    font-size: 3rem;
+}
 
 
 /* profile page */
@@ -218,4 +242,15 @@ a.links.active{
 .form-floating{
     margin-bottom: 10px;
     display: inline-block;
+}
+
+/* Fixed month budget page */
+.fixed_item{
+    display:flex;
+    flex-direction: column;
+}
+.fixed_item_groups{
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
 }

@@ -8,11 +8,11 @@ class BudgetItem {
     }
 
     // Create a new budget item
-    public function createBudgetItem($name, $amount, $used_amount, $budget_id, $startdate, $enddate, $no_end) {
-        $sql = "INSERT INTO budget_items (name, amount, used_amount, budget_id, startdate, enddate, no_end) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public function createBudgetItem($name, $amount, $used_amount = 0, $budget_id, $startdate, $enddate, $no_end = 0, $user_id) {
+        $sql = "INSERT INTO budget_items (name, amount, used_amount, budget_id, startdate, enddate, no_end, user_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($sql);
-        $stmt->bind_param("sddissi", $name, $amount, $used_amount, $budget_id, $startdate, $enddate, $no_end);
+        $stmt->bind_param("sddissii", $name, $amount, $used_amount, $budget_id, $startdate, $enddate, $no_end, $user_id);
 
         if ($stmt->execute()) {
             return true;

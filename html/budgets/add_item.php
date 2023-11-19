@@ -2,6 +2,7 @@
 include "../../main.php";
 
 $email = $_SESSION['email']; // Get the users email
+$user_id = getUserId($con,$email);
 if(isset($_GET['budget'])){
     $budgetId = $_GET['budget'];
 }
@@ -29,8 +30,9 @@ $budget_name = $budgets['name'];
                 <a href="budget_page.php?budget=<?php echo $budgetId;?>" class="btn save" name="back" id="back">Tilbage</a>
             </div>
         </div>
-        <form action="../../config/functions/budget_items.php" method='POST' class="add_item_form">
+        <form action="../../Config/functions/budget_items.php" method='POST' class="add_item_form">
             <input type="hidden" class="form-control" id="fixed" name="fixed" value="<?php echo $budgets['fixed']; ?>">
+            <input type="hidden" class="form-control" id="user_id" name="user_id" value="<?php echo $user_id; ?>">
             <input type="hidden" class="form-control" id="budget_id" name="budget_id" value="<?php echo $budgetId; ?>">
                 <div class="col-md-6"> 
                     <?php if ($created === "true"){ 
