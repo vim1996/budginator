@@ -19,9 +19,9 @@ if(isset($_POST['create'])){
     }
     $result = $budget_item->createBudgetItem($name,$amount,$used_amount,$budget_id,$start,$end,$no_end,$user_id);
     if($result){
-        header('location: ../../html/budgets/add_item.php?budget= ' . $budget_id . '&created=true&name=' . $name);
+        header('location:' . BASE_URL . '/html/budgets/add_item.php?budget= ' . $budget_id . '&created=true&name=' . $name);
     }else{
-        header('location: ../../html/budgets/add_item.php?budget= ' . $budget_id . 'created=false&name=' . $name);
+        header('location:' . BASE_URL . '/html/budgets/add_item.php?budget= ' . $budget_id . 'created=false&name=' . $name);
     }
     
 }
@@ -43,9 +43,9 @@ if(isset($_POST['update'])){
     }
     $result = $budget_item->updateBudgetItem($item_id,$name,$amount,$used_amount,$budget_id,$start,$end,$no_end);
     if($result){
-        header('location: ../../html/budgets/update_item.php?budget= ' . $budget_id . '&updated=true&itemId=' . $item_id);
+        header('location:' . BASE_URL . '/html/budgets/update_item.php?budget= ' . $budget_id . '&updated=true&itemId=' . $item_id);
     }else{
-        header('location: ../../html/budgets/update_item.php?budget= ' . $budget_id . 'updated=false&itemId=' . $item_id);
+        header('location:' . BASE_URL . '/html/budgets/update_item.php?budget= ' . $budget_id . 'updated=false&itemId=' . $item_id);
     }
     
 }

@@ -40,7 +40,7 @@ function emailExsists($con, $email){
     $sql = "SELECT * FROM users WHERE email = ?";
     $stmt = mysqli_stmt_init($con);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header('location: ../../html/signup.php?error=stmtFailed');
+        header('location:' . BASE_URL . '/html/signup.php?error=stmtFailed');
         exit();
     }
 

@@ -26,7 +26,7 @@ if(isset($_POST['create'])){
     );
 
     if($create_budget = createBudget($con,$data)){
-        header('location: ../budgets.php');
+        header('location: ' . BASE_URL . '/html/budget.php');
         exit();
     }else{
         echo "Kunne ikke lave budget";
