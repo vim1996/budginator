@@ -1,6 +1,8 @@
 <?php
+echo __DIR__ . "<br>";
+
 function class_loader($class_name) {
-    $class_file = BASE_URL . "/Config/classes/" . $class_name . ".php";
+    $class_file = __DIR__ . "/classes/" . $class_name . ".php";
 
     
     if (file_exists($class_file)) {
