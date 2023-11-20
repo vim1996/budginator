@@ -1,4 +1,7 @@
 <?php 
+
+echo __DIR__;
+
 class BudgetItem {
     private $db;
 

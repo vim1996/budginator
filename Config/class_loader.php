@@ -1,5 +1,5 @@
 <?php
-
+echo __DIR__;
 function class_loader($class_name) {
     $class_file = __DIR__ . "/classes/" . $class_name . ".php";
     
