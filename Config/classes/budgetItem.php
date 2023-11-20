@@ -8,7 +8,7 @@ class BudgetItem {
     }
 
     // Create a new budget item
-    public function createBudgetItem($name, $amount, $used_amount = 0, $budget_id, $startdate, $enddate, $no_end = 0, $user_id) {
+    public function createBudgetItem($name, $amount, $used_amount, $budget_id, $startdate, $enddate, $no_end, $user_id) {
         $sql = "INSERT INTO budget_items (name, amount, used_amount, budget_id, startdate, enddate, no_end, user_id)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($sql);

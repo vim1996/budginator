@@ -1,4 +1,7 @@
 <?php 
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include "../../main.php";
 $email = $_SESSION['email']; // Get the users email
 $user_id = $_SESSION['user_id'];
