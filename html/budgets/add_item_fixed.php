@@ -21,9 +21,10 @@ if(isset($_POST['add'])){
     }
 
 }
-?>
 
-<a href="../../Config/classes/budgetItem.php">teest</a>
+$item = new BudgetItem();
+print_r($item->getBudgetItemById(1));
+?>
 
 <!DOCTYPE html>
 <html lang="en">
