@@ -3,8 +3,8 @@
 define('BASE_URL', 'http://www.budginator.dk');
 define('DB_CONNECT_PATH', __DIR__ . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'dbConnect.php');
 define('FUNCTIONS_PATH', __DIR__ . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'functions' . DIRECTORY_SEPARATOR . 'functions.php');
-//define('CLASS_LOADER', __DIR__ . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'class_loader.php');
-//require CLASS_LOADER;
+define('CLASS_LOADER', __DIR__ . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'class_loader.php');
+require CLASS_LOADER;
 require DB_CONNECT_PATH;
 require FUNCTIONS_PATH;
 include 'html/static/header.php';
@@ -22,6 +22,7 @@ include 'html/static/header.php';
     <title>Budginator</title>
 </head>
 <body>
+    <?=CLASS_LOADER?>
     
 </body>
 </html>
