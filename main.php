@@ -22,7 +22,6 @@ include 'html/static/header.php';
     <title>Budginator</title>
 </head>
 <body>
-    <?=CLASS_LOADER?>
     
 </body>
 </html>

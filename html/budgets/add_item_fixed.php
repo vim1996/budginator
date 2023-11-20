@@ -1,13 +1,12 @@
 <?php 
 include "../../main.php";
-require "../../Config/class_loader.php";
 $email = $_SESSION['email']; // Get the users email
 $user_id = $_SESSION['user_id'];
 if(isset($_GET['budget'])){
     $budgetId = $_GET['budget'];
 }
 
-
+echo CLASS_LOADER;
 $add = 0;
 $name = "";
 if(isset($_POST['add'])){
