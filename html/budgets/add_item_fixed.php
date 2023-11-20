@@ -6,7 +6,8 @@ if(isset($_GET['budget'])){
     $budgetId = $_GET['budget'];
 }
 
-echo CLASS_LOADER;
+echo CLASS_LOADER . "<br>";
+echo  __DIR__;
 $add = 0;
 $name = "";
 if(isset($_POST['add'])){
