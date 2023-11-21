@@ -1,7 +1,4 @@
 <?php 
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 include "../../main.php";
 $email = $_SESSION['email']; // Get the users email
 $user_id = $_SESSION['user_id'];
@@ -15,18 +12,16 @@ if(isset($_POST['add'])){
     $date = $_POST['date'];
     $name = $_POST['name'];
     $amount = $_POST['amount'];
+    $amount = round($amount, 2);
     $budget_id = $_POST['budget_id'];
-    $item = new BudgetItem();
-    if($item->createBudgetItem($name, $amount, 0, $budget_id, $date, $date, 0, $user_id)){
+
+    if(createBudgetItem($con, $name, $amount, $budget_id, $date, $user_id, $date)){    
         $add = 1;
     }else{
         $add = 2;
     }
 
 }
-
-$item = new BudgetItem();
-print_r($item->getBudgetItemById(1));
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +38,7 @@ print_r($item->getBudgetItemById(1));
                 <a href="budget_page.php?budget=<?php echo $budgetId;?>" class="btn save" name="back" id="back">Tilbage</a>
             </div>
         </div>
-        <form action="" method='POST' class="add_item_form">
+        <form action="" method='POST' class="add_item_form" id="budgetForm">
             <input type="hidden" name="budget_id" id="budget_id" value="<?=$budgetId;?>">
                 <div class="col-md-6"> 
                     <?php if ($add == 1){ 
@@ -73,6 +68,24 @@ print_r($item->getBudgetItemById(1));
                     </div>
                 </div>
         </form>
-    </div>  
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('budgetForm').addEventListener('submit', function (event) {
+                // Get form values
+                var name = document.getElementById('name').value;
+                var amount = document.getElementById('amount').value;
+                var date = document.getElementById('date').value;
+
+                // Check if fields are filled
+                if (name.trim() === '' || amount.trim() === '' || date.trim() === '') {
+                    // Prevent form submission
+                    event.preventDefault();
+                    alert('Alle felter skal udfyldes');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
