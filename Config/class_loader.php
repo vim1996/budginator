@@ -1,13 +1,12 @@
 <?php
 function class_loader($class_name) {
-    define('CLASSES', __DIR__ . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . $class_name . '.php');
-    $class_file = CLASSES;
+    $class_file = __DIR__ . "/classes/" . $class_name . ".php";
     
     if (file_exists($class_file)) {
-        echo "class: " . $class_file . "<br>";
         require_once $class_file;
+        echo "Works <br>";
     }
 }
-
+echo "test";
 spl_autoload_register('class_loader');
 ?>
