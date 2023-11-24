@@ -15,11 +15,14 @@ if(isset($_POST['add'])){
     $amount = round($amount, 2);
     $budget_id = $_POST['budget_id'];
 
+    $fixed_budget_item = new BudgetItem($con);
+    $fixed_budget_item->createBudgetItem($name, $amount, $budget_id, $date, $date, $user_id);
+    /*
     if(createBudgetItem($con, $name, $amount, $budget_id, $date, $user_id, $date)){    
         $add = 1;
     }else{
         $add = 2;
-    }
+    }*/
 
 }
 ?>

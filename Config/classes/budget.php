@@ -2,8 +2,7 @@
 class Budget {
     private $db;
 
-    public function __construct() {
-        global $con;
+    public function __construct($con) {
         $this->db = $con;
     }
 

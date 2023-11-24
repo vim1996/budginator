@@ -1,6 +1,6 @@
 <?php 
 include "../../main.php";
-$budget_item = new BudgetItem();
+$budget_item = new BudgetItem($con);
 
 if(isset($_POST['create'])){
     $name = $_POST['name'];
@@ -17,7 +17,7 @@ if(isset($_POST['create'])){
     }else{
         $no_end = 0;
     }
-    $result = $budget_item->createBudgetItem($name,$amount,$used_amount,$budget_id,$start,$end,$no_end,$user_id);
+    $result = $budget_item->createBudgetItem($name,$amount,$budget_id,$start,$end,$user_id,$used_amount,$no_end);
     if($result){
         header('location:' . BASE_URL . '/html/budgets/add_item.php?budget= ' . $budget_id . '&created=true&name=' . $name);
     }else{

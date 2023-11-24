@@ -3,13 +3,12 @@
 class BudgetItem {
     private $db;
 
-    public function __construct() {
-        global $con;
+    public function __construct($con) {
         $this->db = $con;
     }
 
     // Create a new budget item
-    public function createBudgetItem($name, $amount, $used_amount, $budget_id, $startdate, $enddate, $no_end, $user_id) {
+    public function createBudgetItem($name, $amount, $budget_id, $startdate, $enddate, $user_id, $used_amount = 0, $no_end = 0) {
         $sql = "INSERT INTO budget_items (name, amount, used_amount, budget_id, startdate, enddate, no_end, user_id)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($sql);

@@ -98,9 +98,11 @@ if (isset($_GET['user']) && $_GET['user'] == "Updated") {
                                     <?php echo $budgetName; ?>
                                 </div>
                                 <div class="budget_inf col-md-12">
+                                    <?php if(!$budget['fixed']){?>
                                     <div class="progress">
                                         <div class="progress-bar-striped" role="progressbar" aria-valuenow="<?php echo $percentageUsed;?>" style="width:<?php echo $percentageUsed;?>%;" aria-valuemin="0" aria-valuemax="100"><?php echo $budgetUsedAmount . " / " . $budgetTotalAmount . " DKK";?></div>
                                     </div>
+                                    <?php }else{}?>
                                 </div>
                                 <?php if ($allBudgetUsers != ''){ ?>
                                 <div class="budget_shared col-md-12">

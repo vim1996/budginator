@@ -4,7 +4,7 @@ include "../../main.php";
 $email = $_SESSION['email']; // Get the users email
 if(isset($_GET['itemId'])){
     $itemId = $_GET['itemId'];
-    $items = new budgetItem();
+    $items = new budgetItem($con);
     $item = $items->getBudgetItemById($itemId);
     $budget_id = $item['budget_id'];
     $item_name = $item['name'];
@@ -16,7 +16,7 @@ if(isset($_GET['itemId'])){
         $item_end = date('Y-m-d', strtotime($item['enddate']));
     }
 
-    $budgets = new Budget();
+    $budgets = new Budget($con);
     $budget = $budgets->getBudgetById($budget_id);
     $budget_name = $budget['name'];
 }
