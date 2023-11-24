@@ -17,12 +17,11 @@ if(isset($_POST['add'])){
 
     $fixed_budget_item = new BudgetItem($con);
     $fixed_budget_item->createBudgetItem($name, $amount, $budget_id, $date, $date, $user_id);
-    /*
-    if(createBudgetItem($con, $name, $amount, $budget_id, $date, $user_id, $date)){    
+    if($fixed_budget_item){    
         $add = 1;
     }else{
         $add = 2;
-    }*/
+    }
 
 }
 ?>
