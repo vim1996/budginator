@@ -4,6 +4,7 @@ function class_loader($class_name) {
     $class_file = CLASSES;
     
     if (file_exists($class_file)) {
+        echo "class: " . $class_file . "<br>";
         require_once $class_file;
     }
 }
