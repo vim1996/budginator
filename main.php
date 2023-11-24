@@ -9,8 +9,6 @@ require DB_CONNECT_PATH;
 require FUNCTIONS_PATH;
 include 'html/static/header.php';
 
-$t = new budgetItem($con);
-
 ?>
 
 <!DOCTYPE html>

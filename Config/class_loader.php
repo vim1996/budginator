@@ -7,6 +7,5 @@ function class_loader($class_name) {
         echo "Works <br>";
     }
 }
-echo "test";
 spl_autoload_register('class_loader');
 ?>
