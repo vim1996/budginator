@@ -1,6 +1,7 @@
 <?php
 function class_loader($class_name) {
-    $class_file = __DIR__ . "/classes/" . $class_name . ".php";
+    define('CLASSES', __DIR__ . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . $class_name . '.php');
+    $class_file = CLASSES;
     
     if (file_exists($class_file)) {
         require_once $class_file;
