@@ -5,7 +5,7 @@ $user_id = $_SESSION['user_id'];
 if(isset($_GET['budget'])){
     $budgetId = $_GET['budget'];
 }
-$t = new budgetItem($con);
+$t = new BudgetItem($con);
 $add = 0;
 $name = "";
 if(isset($_POST['add'])){
