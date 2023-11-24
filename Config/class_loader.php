@@ -4,7 +4,6 @@ function class_loader($class_name) {
     
     if (file_exists($class_file)) {
         require_once $class_file;
-        echo "Works <br>";
     }
 }
 spl_autoload_register('class_loader');
