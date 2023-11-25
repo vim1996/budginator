@@ -80,6 +80,14 @@ input{
     color: #007ffd;
     border: 2px solid #007ffd;
 }
+.btn.delete{
+    background-color: #c30000;
+    border: 2px solid #c30000;
+}
+.btn.delete:hover{
+    color: #c30000;
+    border: 2px solid #c30000;
+}
 .btn.create{
     background-color: #9584d5;
     border: 2px solid #9584d5;
@@ -201,7 +209,71 @@ a.create_budget:hover{
     text-align: center;
     font-size: 3rem;
 }
+.bi-heart-fill{
+    color:white;
+}
+.bi-heart{
+    color:white;
+}
+.bi-gear-fill{
+    cursor: pointer;
+}
+.gear_setting{
+    display: flex; 
+    align-items: center; 
+    margin-right:20px;
+}
+.popup-menu {
+    display: none;
+    position: absolute;
+    top: 15rem;
+    right: 30rem;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    z-index: 1000; /* Ensure the menu appears on top of other elements */
+    border-radius: 10px;
+    box-shadow: 5px 5px 6px #9584d5;
+}
+.popup-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+}
+.popup-menu a:hover {
+    background-color: #9584d569;
+    color: black;
+    border-radius: 10px;
+}
 
+/* Update budget page */
+.bi-question-circle{
+    font-size: 12px;
+    font-style: normal;
+}
+.tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: #ededed;
+    color: #000000;
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 21rem; /* Position the tooltip above the text */
+    left: 24rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+    box-shadow: 5px 5px 6px #9584d5;
+}
+.bi-question-circle:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
 
 /* profile page */
 .profil_information{
@@ -226,6 +298,7 @@ a.create_budget:hover{
     font-size: 12px;
 }
 .budget_link{
+    width:100%;
     color: #fffffff7;
     text-decoration: none;
 }
@@ -253,4 +326,42 @@ a.create_budget:hover{
     display: flex;
     flex-direction: row;
     column-gap: 10px;
+}
+
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #9584d5;
+    width: 30rem;
+    border-radius: 10px;
+}
+.modal-content button{
+    width: 5rem;
+    margin: 5px;
+}
+.close {
+    color: #aaa;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: -30px;
+    margin-left: -15px;
+}
+.close:hover,
+.close:focus {
+    color: black;
 }

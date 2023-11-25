@@ -77,7 +77,7 @@ $total = 0.00;
                     <tr>
                         <td><?= $item['name']; ?></td>
                         <td><?= $item['amount']; ?></td> <?php $total += $item['amount']; ?>
-                        <td><?= date('d-m-Y', strtotime($item['created_at'])); ?></td>
+                        <td><?= date('d-m-Y', strtotime($item['startdate'])); ?></td>
                         <td><?= $item['first_name']; ?></td>
                     </tr>
                 <?php } ?>

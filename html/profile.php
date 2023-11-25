@@ -74,45 +74,47 @@ if (isset($_GET['user']) && $_GET['user'] == "Updated") {
             <div class="col-md-6 budgets_column">
                 <?php 
                 foreach($budgets as $budgetId => $budget){
-                    $budgetName = $budget['name'];
-                    $budgetTotalAmount = $budget['totalAmount'];
-                    $budgetUsedAmount = $budget['usedAmount'];
-                    $allBudgetUsers = "";
-                    $budgetUsers = getBudgetUsers($con, $budgetId); // Gets the users associated with that budget
-                    foreach($budgetUsers as $budgetUser => $primaryUser){
-                        if($primaryUser != '1'){ // Add users that are not primary
-                            if($allBudgetUsers == ''){
-                                $allBudgetUsers .= $budgetUser;
-                            }else{
-                                $allBudgetUsers .= ", " . $budgetUser;
+                    if($budget['favorite'] == '1'){
+                        $budgetName = $budget['name'];
+                        $budgetTotalAmount = $budget['totalAmount'];
+                        $budgetUsedAmount = $budget['usedAmount'];
+                        $allBudgetUsers = "";
+                        $budgetUsers = getBudgetUsers($con, $budgetId); // Gets the users associated with that budget
+                        foreach($budgetUsers as $budgetUser => $primaryUser){
+                            if($primaryUser != '1'){ // Add users that are not primary
+                                if($allBudgetUsers == ''){
+                                    $allBudgetUsers .= $budgetUser;
+                                }else{
+                                    $allBudgetUsers .= ", " . $budgetUser;
+                                }
                             }
                         }
-                    }
-    
-                    $percentageUsed = round(($budgetUsedAmount / $budgetTotalAmount) * 100); // Calculate the percentage
-                ?>
-                    <div class="col-md-10">
-                        <a href="<?php echo BASE_URL; ?>/html/budgets/budget_page.php?budget=<?php echo $budgetId; ?>" class="budget_link">
-                            <div class="budgets col-md-12">
-                                <div class="budget_name col-md-12">
-                                    <?php echo $budgetName; ?>
-                                </div>
-                                <div class="budget_inf col-md-12">
-                                    <?php if(!$budget['fixed']){?>
-                                    <div class="progress">
-                                        <div class="progress-bar-striped" role="progressbar" aria-valuenow="<?php echo $percentageUsed;?>" style="width:<?php echo $percentageUsed;?>%;" aria-valuemin="0" aria-valuemax="100"><?php echo $budgetUsedAmount . " / " . $budgetTotalAmount . " DKK";?></div>
+        
+                        $percentageUsed = round(($budgetUsedAmount / $budgetTotalAmount) * 100); // Calculate the percentage
+                        ?>
+                        <div class="col-md-10">
+                            <a href="<?php echo BASE_URL; ?>/html/budgets/budget_page.php?budget=<?php echo $budgetId; ?>" class="budget_link">
+                                <div class="budgets col-md-12">
+                                    <div class="budget_name col-md-12">
+                                        <?php echo $budgetName; ?>
                                     </div>
-                                    <?php }else{}?>
+                                    <div class="budget_inf col-md-12">
+                                        <?php if(!$budget['fixed']){?>
+                                        <div class="progress">
+                                            <div class="progress-bar-striped" role="progressbar" aria-valuenow="<?php echo $percentageUsed;?>" style="width:<?php echo $percentageUsed;?>%;" aria-valuemin="0" aria-valuemax="100"><?php echo $budgetUsedAmount . " / " . $budgetTotalAmount . " DKK";?></div>
+                                        </div>
+                                        <?php }else{}?>
+                                    </div>
+                                    <?php if ($allBudgetUsers != ''){ ?>
+                                    <div class="budget_shared col-md-12">
+                                        <div class="shared_text">Delt med: <?php echo $allBudgetUsers;?></div>
+                                    </div>
+                                    <?php }?>
                                 </div>
-                                <?php if ($allBudgetUsers != ''){ ?>
-                                <div class="budget_shared col-md-12">
-                                    <div class="shared_text">Delt med: <?php echo $allBudgetUsers;?></div>
-                                </div>
-                                <?php }?>
-                            </div>
-                        </a>
-                    </div>
-                <?php } ?>
+                            </a>
+                        </div>
+                    <?php }
+                } ?>
             </div>
         <?php }
         ?>

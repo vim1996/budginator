@@ -1,5 +1,6 @@
-<?php 
-
+<?php
+$primary_user = false;
+$user_id = $_SESSION['user_id']; // USER ID
 $budgetItems = getBudgetItems($con, $budgetId);
 $user = getUser($con, $email);
 $currentMonth = date('m'); // Get the current month
@@ -33,6 +34,14 @@ foreach ($budgetMonths as $monthData) { if (isset($monthData['total'])) { $total
 
 // Now, $uniqueItems contains all the unique items (categories) excluding "total"
 foreach (array_keys($budgetMonths) as $yearMonth) { $uniqueDates[] = $yearMonth; } // Loop through the keys of $budgetMonths to find unique dates
+
+$b = new Budget($con);
+$b_users = $b->getUsers($budgetId);
+foreach ($b_users as $b_user) {
+    if ($b_user['user_id'] == $user_id && $b_user['primary_user'] == '1') {
+        $primary_user = true;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -63,6 +72,12 @@ foreach (array_keys($budgetMonths) as $yearMonth) { $uniqueDates[] = $yearMonth;
 </head>
 <body>
     <div>
+        <?php
+        if($updated){?>
+            <div class="col-md-12">
+                <div style="text-align: center; color: green;"><?=$budget['name'];?> blev opdatéret</div>
+            </div>
+        <?php }?>
         <div class="col-md-12">
             <div class="budget_title"><?=$budget['name'];?></div>
         </div>
@@ -72,9 +87,19 @@ foreach (array_keys($budgetMonths) as $yearMonth) { $uniqueDates[] = $yearMonth;
             <div class="col-md-6" style="margin-bottom: 5px; text-align: left;">
                 <a href="../budgets.php" name="back" class="btn save" id="back">Tilbage</a>
             </div>
-            <div class="col-md-6" style="margin-bottom: 5px; text-align: right;">
+            <div class="col-md-6" style="margin-bottom: 5px; text-align: right; display: flex; flex-direction: row; justify-content: flex-end;">
+                <div class="gear_setting" id="gearIcon" onclick="togglePopupMenu()"><i class="bi bi-gear-fill"></i></div>
                 <a href="add_item.php?budget=<?php echo $budgetId ?>" name="insert_item" class="btn create" id="insert_item">Indsæt linje</a>
             </div>
+        </div>
+        <!-- Pop-up menu -->
+        <div class="popup-menu" id="popupMenu">
+            <!-- Add your menu options here -->
+            <a href="update_budget.php?update_budget=<?=$budgetId?>">Rediger budget</a>
+            <a href="share_budget.php?budget=<?=$budgetId?>">Del budget</a>
+            <?php if($primary_user){?> 
+                <a href="" id="delete-budget" onclick="handleDeleteBudget()">Slet budget</a>
+            <?php } ?>
         </div>
         <div class="table_box col-md-10" id="table_container" style="display:inline-block;">
             <table class="table table-striped table-dark" id="scrollable_table">
@@ -139,6 +164,22 @@ foreach (array_keys($budgetMonths) as $yearMonth) { $uniqueDates[] = $yearMonth;
             </table>
         </div>
     </div>
+    <!-- The Modal -->
+    <div id="customModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModalBtn">&times;</span>
+            <p style="text-align:center;">Er du sikker på du vil slette budget <?=$budget['name'];?>?</p>
+            <div style="display:flex; justify-content: center;">
+                <button id="confirmBtn" class="btn save">Ja</button>
+                <button id="cancelBtn" class="btn delete">Nej</button>
+            </div>
+            <div id="modal_data" data-budget-id="<?=$budgetId;?>"></div>
+        </div>
+    </div>
+
+    <script src="../../Javascript/budget_page.js"></script>
+
+
     <script>
         // Get references to the table container and the scrollable table
         const table_container = document.querySelector('#table_container');

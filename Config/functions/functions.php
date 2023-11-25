@@ -171,12 +171,16 @@ function getBudgets($con,$email){
                 $totalAmount = $row['total_amount'];
                 $usedAmount = $row['used_amount'];
                 $fixed = $row['fixed'];
+                $favorite = $row['favorite'];
+                $deleted = $row['deleted'];
 
                 $budget = [ // Create an associative array for the current budget
                     "name" => $name,
                     "totalAmount" => $totalAmount,
                     "usedAmount" => $usedAmount,
-                    "fixed" => $fixed
+                    "fixed" => $fixed,
+                    "favorite" => $favorite,
+                    "deleted" => $deleted
                 ];
 
                 $budgets[$budgetId] = $budget; // Store the budget array in the $budgets array using the budget ID as key
