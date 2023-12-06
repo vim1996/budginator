@@ -62,6 +62,15 @@ class BudgetItem {
             return null;
         }
     }
+    public function afstemBudgetItem($where) {
+        $sql = "UPDATE budget_items SET afstemt = 1 WHERE " . $where;
+        $result = mysqli_query($this->db, $sql);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 ?>

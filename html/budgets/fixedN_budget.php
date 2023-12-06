@@ -127,7 +127,7 @@ foreach ($b_users as $b_user) {
                                     if ($items == $category) {
                                         foreach ($amount as $key => $value) {
                                             if ($key == 'value') {
-                                                echo $value . "<br>"; // Echo only the 'value' key
+                                                echo rtrim(rtrim($value, '0'), '.') . "<br>";  // Echo only the 'value' key
                                             }
                                         }
                                     }

@@ -35,7 +35,7 @@ if(isset($_POST) && isset($_POST['share'])){
     <div class="container budget_item">
         <div class="col-md-6">
             <div class="form-floating col-md-6">
-                <a href="budget_page.php?budget=<?php echo $budgetId;?>" class="btn save" name="back" id="back">Tilbage</a>
+                <a href="budget_page.php?budget=<?php echo $budget_id;?>" class="btn save" name="back" id="back">Tilbage</a>
             </div>
         </div>
         <?php if($added === false){?>

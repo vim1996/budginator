@@ -4,7 +4,7 @@ $user_id = $_SESSION['user_id']; // USER ID
 $budgetItems = getBudgetItems($con, $budgetId);
 $user = getUser($con, $email);
 
-$sql = "SELECT min(startdate) AS start FROM budget_items WHERE budget_id = $budgetId";
+$sql = "SELECT min(startdate) AS start FROM budget_items WHERE budget_id = $budgetId AND afstemt != 1";
 $dates = array();
 $startdate = date('d-m-Y', strtotime(mysqli_fetch_assoc(mysqli_query($con, $sql))['start']));
 $enddate = date('d-m-Y');
@@ -37,6 +37,12 @@ foreach ($b_users as $b_user) {
     if ($b_user['user_id'] == $user_id && $b_user['primary_user'] == '1') {
         $primary_user = true;
     }
+}
+
+$afstemt = "";
+if(isset($_GET["afstemt"])){
+    $afstemt = $_GET["afstemt"];
+    $afstemtDate = date_create_from_format('Y-m', $afstemt)->format('M-y');
 }
 ?>
 
@@ -80,7 +86,11 @@ foreach ($b_users as $b_user) {
             <div class="col-md-12">
                 <div style="text-align: center; color: green;"><?=$budget['name'];?> blev opdatéret</div>
             </div>
-        <?php }?>
+        <?php }elseif($afstemt !== ''){ ?>
+            <div class="col-md-12">
+                <div style="text-align: center; color: green;"><?=$afstemtDate;?> er blevet afstemt</div>
+            </div>
+        <?php } ?>
         <div class="col-md-12">
             <div class="budget_title"><?=$budget['name'];?></div>
         </div>
@@ -90,7 +100,8 @@ foreach ($b_users as $b_user) {
             <div class="col-md-6" style="margin-bottom: 5px; text-align: left;">
                 <a href="../budgets.php" name="back" class="btn save" id="back">Tilbage</a>
             </div>
-            <div class="col-md-6" style="margin-bottom: 5px; text-align: right;">
+            <div class="col-md-6" style="margin-bottom: 5px; text-align: right; display: flex; flex-direction: row; justify-content: flex-end;">
+                <div class="gear_setting" id="gearIcon" onclick="togglePopupMenu()"><i class="bi bi-gear-fill"></i></div>
                 <a href="add_item_fixed.php?budget=<?=$budgetId;?>" name="insert_item" class="btn create" id="insert_item">Indsæt linje</a>
             </div>
             
